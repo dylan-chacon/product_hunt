@@ -1,14 +1,12 @@
-
-import styles from '../styles/Home.module.css'
+import React from 'react';
+import Layout from '../components/layout/Layout';
 
 export default function Home() {
   return (
     <div>
-      <h1>Inicio</h1>
-      <style jsx>{`
-      h1 {
-        color: red
-      }`}</style>
+      <Layout>
+        <h1>Inicio</h1>
+      </Layout>
     </div>
   )
 }
