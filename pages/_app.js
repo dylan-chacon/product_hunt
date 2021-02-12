@@ -1,22 +1,22 @@
-import '../styles/globals.css'
 import App from 'next/app';
-import useAuth from '../hooks/useAuth';
 import firebase, { FirebaseContext } from '../firebase';
+import useAuth from '../hooks/useAuth';
 
-const MyApp = (props) => {
-  const { Component, pageProps } = props;
+const MyApp = props => {
+    const user = useAuth();
+    const { Component, pageProps } = props;
+    const value = { user, firebase };
 
-  const user = useAuth();
-  console.log('useeer', user);
-  return(
-    <FirebaseContext.Provider
-      value={{
-        firebase
-      }}
-    >
-      <Component {...pageProps} />
-    </FirebaseContext.Provider>
-  );
+    return (
+        <FirebaseContext.Provider
+            value={{
+                user,
+                firebase
+            }}
+        >
+            <Component {...pageProps} />
+        </FirebaseContext.Provider>
+    )
 }
 
 export default MyApp;

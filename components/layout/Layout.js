@@ -51,9 +51,9 @@ const Layout = (props) => {
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Yanone+Kaffeesatz&display=swap" rel="stylesheet"/>
                 <link href="/static/css/app.css" rel="stylesheet" />
-                <Header />
             </Head>
             <main>
+                <Header />
                 {props.children}
             </main>
         </>
