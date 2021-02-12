@@ -60,7 +60,7 @@ const Header = () => {
                     { user ? (
                         <>
                             <p css={css`margin-right: 2rem;`}>Hola: {user.displayName}</p>
-                            <Button bgColor>Cerrar Sesión</Button>
+                            <Button bgColor onClick={async () => await firebase.logOut()}>Cerrar Sesión</Button>
                         </>
                     ) : (
                         <>
@@ -68,7 +68,7 @@ const Header = () => {
                                 <Button bgColor>Login</Button>
                             </Link>
                             <Link href="/sign-in" passHref>
-                                <Button onClick={() => firebase.logOut()}>Crear cuenta</Button>
+                                <Button>Crear cuenta</Button>
                             </Link>
                         </>
                     )}

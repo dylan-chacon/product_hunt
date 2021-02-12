@@ -17,12 +17,12 @@ const Nav = styled.nav`
 `;
 
 const Navigation = () => {
-    // const {user} = useContext(FirebaseContext);
+    const {user} = useContext(FirebaseContext);
     return (
         <Nav>
             <Link href="/">Inicio</Link>
             <Link href="/popular">Populares</Link>
-            <Link href="/nuevo-producto">Nuevo Producto</Link>
+            {user && (<Link href="/nuevo-producto">Nuevo Producto</Link>)}
         </Nav>
     );
 }
