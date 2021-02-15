@@ -11,7 +11,6 @@ import { FirebaseContext } from '../firebase';
 const INITIAL_STATE = {
     name: '',
     company: '',
-    image: '',
     url: '',
     description: '',
 };
@@ -28,7 +27,7 @@ const NewProduct = () => {
     const {
         values, errors, handleChange, handleSubmit, handleBlur,
     } = useValidation(INITIAL_STATE, validateCreateProduct, createProduct);
-    const { name, company, image, url, description } = values;
+    const { name, company, url, description } = values;
 
     async function createProduct() {
         if (!user) return router.push('/login');
