@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const ContProduct = styled.li`
     padding: 4rem;
@@ -84,7 +85,9 @@ const Product = ({product}) => {
                     <Image src={urlImage} />
                 </div>
                 <div>
-                    <Title>{name}</Title>
+                    <Link href="/productos/[id]" as={`/productos/${id}`}>
+                        <Title>{name}</Title>
+                    </Link>
                     <TextDescription>{description}</TextDescription>
                     <Comments>
                         <div>

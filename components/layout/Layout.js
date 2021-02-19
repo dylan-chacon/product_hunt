@@ -40,7 +40,10 @@ const Layout = (props) => {
                         padding: 0;
                     }
                     a {
-                        text-decoration: none
+                        text-decoration: none;
+                    }
+                    img {
+                        max-width: 100%;
                     }
                 `}
             />
