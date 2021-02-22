@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { FirebaseContext } from '../../firebase';
 import Error404 from '../../components/layout/404';
 import Layout from '../../components/layout/Layout';
-import Button from '../../components/UI/Button';
+import Button, { Buttons } from '../../components/UI/Button';
 import { InputSubmit, Field } from '../../components/UI/Form';
 
 const ContenedorProducto = styled.div`
@@ -20,7 +20,7 @@ const Details = () => {
     //states
     const [product, setProduct] = useState({});
     const [error, setError] = useState(false);
-    const { comments, createdAt, description, name, company, url, urlImage, votes, creator } = product;
+    const { comments, createdAt, description, name, company, url, urlImage, votes, creator, voted } = product;
 
     //router
     const router = useRouter();
@@ -39,7 +39,21 @@ const Details = () => {
             }
         }
         if (id) getProduct();
-    }, [id])
+    }, [id]);
+    const vote = () => {
+        if (!user) return router.push('login');
+        
+        const newVotes = votes + 1;
+        //validar voto
+        if (voted.includes(user.uid)) return;
+        // actualizar db 
+        firebase.db.collection('products').doc(id).update({
+            votes: newVotes,
+            voted: [...voted, user.uid],
+        });
+        // atualizar state
+        setProduct({ ...product, votes: newVotes, voted: [...voted, user.uid], });
+    };
 
     return (
         <>
@@ -95,7 +109,7 @@ const Details = () => {
                                 <p css={css`
                                     text-align: center;
                                 `}>{votes} votos</p>
-                                {user && (<Button>Votar</Button>)}
+                                <Buttons onClick={() => vote()}>Votar</Buttons>
                             </div>
                         </aside>
                     </ContenedorProducto>

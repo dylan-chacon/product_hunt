@@ -17,5 +17,24 @@ const Button = styled.a`
         cursor: pointer;
     }
 `;
+
+export const Buttons = styled.button`
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid #d1d1d1;
+    padding: .8rem 2rem;
+    margin: 2rem auto;
+    text-align: center;
+    background-color: ${props => props.bgColor ? '#DA552F' : 'white'};
+    color: ${props => props.bgColor ? 'white' : '#000'};
+    &:last-of-type {
+        margin-right:0;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    width: 100%;
+`;
  
 export default Button;

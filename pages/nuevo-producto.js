@@ -47,6 +47,7 @@ const NewProduct = () => {
                 id: user.uid,
                 name: user.displayName,
             },
+            voted: [],
         };
 
         // firestore
