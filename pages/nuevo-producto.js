@@ -7,6 +7,7 @@ import useValidation from '../hooks/useValidation';
 import validateCreateProduct from '../validations/validateCreateProduct';
 import { Form, Field, InputSubmit, Error } from '../components/UI/Form';
 import { FirebaseContext } from '../firebase';
+import Error404 from '../components/layout/404';
 
 const INITIAL_STATE = {
     name: '',
@@ -42,6 +43,10 @@ const NewProduct = () => {
             votes: 0,
             comments: [],
             createdAt: Date.now(),
+            creator: {
+                id: user.uid,
+                name: user.displayName,
+            },
         };
 
         // firestore
@@ -74,7 +79,8 @@ const NewProduct = () => {
     return (
         <div>
             <Layout>
-                <>
+                {!user ? <Error404 /> : (
+                    <>
                     <h1
                         css={css`
                             text-align: center;
@@ -158,6 +164,7 @@ const NewProduct = () => {
                         <InputSubmit type="submit" value="Crear Producto" />
                     </Form>
                 </>
+                )}
             </Layout>
         </div>
     );

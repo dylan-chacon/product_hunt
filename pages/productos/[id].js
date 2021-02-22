@@ -20,14 +20,14 @@ const Details = () => {
     //states
     const [product, setProduct] = useState({});
     const [error, setError] = useState(false);
-    const { comments, createdAt, description, name, company, url, urlImage, votes } = product;
+    const { comments, createdAt, description, name, company, url, urlImage, votes, creator } = product;
 
     //router
     const router = useRouter();
     const { query: { id } } = router;
 
     //useContext
-    const { firebase } = useContext(FirebaseContext);
+    const { firebase, user } = useContext(FirebaseContext);
 
     useEffect(() => {
         const getProduct = async () => {
@@ -54,19 +54,24 @@ const Details = () => {
                     <ContenedorProducto>
                         <div>
                             <p>Publicado: {new Date(createdAt).toLocaleString()}</p>
+                            <p>Por: {creator && creator.name} de {company}</p>
                             <img src={urlImage} />
                             <p>{description}</p>
 
-                            <h2>Agrega tu comentario</h2>
-                            <form>
-                                <Field>
-                                    <input
-                                        type="text"
-                                        name="message"
-                                    />
-                                </Field>
-                                <InputSubmit type="submit" value="Add comment" />
-                            </form>
+                            {user && (
+                                <>
+                                    <h2>Agrega tu comentario</h2>
+                                    <form>
+                                        <Field>
+                                            <input
+                                                type="text"
+                                                name="message"
+                                            />
+                                        </Field>
+                                        <InputSubmit type="submit" value="Add comment" />
+                                    </form>
+                                </>
+                            )}
                             <h2 css={css`
                                 margin: 2rem 0;
                             `}>Comentarios:</h2>
@@ -90,7 +95,7 @@ const Details = () => {
                                 <p css={css`
                                     text-align: center;
                                 `}>{votes} votos</p>
-                                <Button>Votar</Button>
+                                {user && (<Button>Votar</Button>)}
                             </div>
                         </aside>
                     </ContenedorProducto>
