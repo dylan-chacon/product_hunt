@@ -69,7 +69,7 @@ const Details = () => {
     const addComment = (e) => {
         e.preventDefault();
 
-        if (!user) return router.push('login');
+        if (!user) return router.push('/login');
         // extra info
         comment.userID = user.uid;
         comment.userName = user.displayName;
@@ -83,6 +83,22 @@ const Details = () => {
     const isCreator = (id) => {
         if (creator.id === id) return true;
     };
+    const canDelete = () => {
+        if (!user) return false;
+        if (creator) {
+            if (creator.id === user.uid) return true;
+        }
+    }
+    const deleteProduct = async () => {
+        if (!user) return router.push('/login');
+        if (creator.id !== user.uid) return router.push('/login');
+        try {
+            await firebase.db.collection('products').doc(id).delete();
+            router.push('/')
+        } catch (error) {
+            console.log('error eliminando');
+        }
+    }
 
     return (
         <>
@@ -118,7 +134,7 @@ const Details = () => {
                             <h2 css={css`
                                 margin: 2rem 0;
                             `}>Comentarios:</h2>
-                            {comments.length === 0 ? (<p>Aún no hay comentarios</p>) : (
+                            {comments && comments.length === 0 ? (<p>Aún no hay comentarios</p>) : (
                                 <ul>
                                     {comments && comments.map((comment, i) => (
                                         <li
@@ -158,6 +174,9 @@ const Details = () => {
                             </div>
                         </aside>
                         </ContenedorProducto>
+                        {canDelete() && (
+                            <Button bgColor="true" onClick={deleteProduct}>Eliminar Producto</Button>
+                        )}
                     </div>
                 )}
             </Layout>
