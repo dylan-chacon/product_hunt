@@ -40,20 +40,22 @@ const Layout = (props) => {
                         padding: 0;
                     }
                     a {
-                        text-decoration: none
+                        text-decoration: none;
+                    }
+                    img {
+                        max-width: 100%;
                     }
                 `}
             />
             <Head>
-                <html lang="es" />
                 <title>Product Hunt Clone</title>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossOrigin="anonymous" />
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Yanone+Kaffeesatz&display=swap" rel="stylesheet"/>
                 <link href="/static/css/app.css" rel="stylesheet" />
-                <Header />
             </Head>
             <main>
+                <Header />
                 {props.children}
             </main>
         </>
