@@ -23,7 +23,6 @@ export default function Home() {
             products.push(product);
           });
           setProducts(products);
-          console.log(products);
         });
     }
     getProducts();
@@ -36,7 +35,7 @@ export default function Home() {
           <div className="contenedor">
             <ul className="bg-white">
               {products.map(product => (
-                <Product product={product} />
+                <Product key={product.id} product={product} />
               ))}
             </ul>
           </div>

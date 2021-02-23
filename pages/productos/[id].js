@@ -87,9 +87,8 @@ const Details = () => {
     return (
         <>
             <Layout>
-                {error && <Error404 />}
-
-                <div className="contenedor">
+                {error ? <Error404 /> : (
+                    <div className="contenedor">
                     <h1 css={css`
                         margin-top: 5rem;
                         text-align: center;
@@ -158,8 +157,9 @@ const Details = () => {
                                 <Buttons onClick={() => vote()}>Votar</Buttons>
                             </div>
                         </aside>
-                    </ContenedorProducto>
-                </div>
+                        </ContenedorProducto>
+                    </div>
+                )}
             </Layout>
         </>
     );
